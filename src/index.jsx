@@ -5,9 +5,11 @@ export default class ModalVideo extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      isOpen: false,
-      modalVideoWidth: this.getWidthFulfillAspectRatio(this.props.ratio, window.innerHeight, window.innerWidth)
+    if (typeof window !== "undefined")  {
+      this.state = {
+        isOpen: false,
+        modalVideoWidth: this.getWidthFulfillAspectRatio(this.props.ratio, window.innerHeight, window.innerWidth)
+      };
     }
     this.closeModal = this.closeModal.bind(this)
     this.updateFocus = this.updateFocus.bind(this)
@@ -132,7 +134,7 @@ export default class ModalVideo extends React.Component {
    * When the height of the video is greater than the height of the window,
    * this function return the width that fulfill the aspect ratio for the height of the window.
    * In other cases, this function return '100%'(the height relative to the width is determined by css).
-   * 
+   *
    * @param string ratio
    * @param number maxWidth
    * @returns number | '100%'
